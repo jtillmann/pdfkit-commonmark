@@ -665,7 +665,7 @@ class CommonmarkPDFKitRenderer {
         };
 
         operations.forEach(op => {
-            executeOperation(op, doc, Object.assign({}, this.options, {pdfkit: pdfkitOptions}));
+            executeOperation(op, doc, Object.assign({}, this.options, {pdfkit: pdfkitOptions, initialPosition}));
         });
 
         const finalPosition = {

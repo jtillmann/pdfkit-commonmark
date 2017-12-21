@@ -75,7 +75,7 @@ export default (operation, doc, options) => {
     // indent for lists
     if (operation.listDepth >= 0) {
         const indent = List.indent(doc, operation.listItemStyle, operation.listItemCount, options.fontSize);
-        doc.x = doc.page.margins.left + (operation.listDepth * indent);
+        doc.x = options.initialPosition.x + (operation.listDepth * indent);
     }
 
     if (operation.hasOwnProperty('text')) {
@@ -89,7 +89,7 @@ export default (operation, doc, options) => {
         });
 
         if ((options.pdfkit || {}).hasOwnProperty('width')) {
-            const indent = doc.x - doc.page.margins.left;
+            const indent = doc.x - options.initialPosition.x;
             if (indent > 0) {
                 textOptions.width -= indent;
             }

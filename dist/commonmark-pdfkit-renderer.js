@@ -335,9 +335,6 @@ var CommonmarkPDFKitRenderer = function () {
                         return moveDown;
                     }();
 
-                    // console.log('node.type', node.type);
-                    // console.log('event.entering', event.entering);
-
                     switch (node.type) {
                         case 'text':
                             {
@@ -842,8 +839,6 @@ var CommonmarkPDFKitRenderer = function () {
                     y: doc.y,
                     x: doc.x
                 };
-
-                console.log(operations);
 
                 operations.forEach(function (op) {
                     (0, _executeOperation2['default'])(op, doc, (0, _assign2['default'])({}, _this2.options, { pdfkit: pdfkitOptions, initialPosition: initialPosition }));

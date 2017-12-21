@@ -39,7 +39,7 @@ class CommonmarkPDFKitRenderer {
         let event, node;
 
         // array holding the extracted operations
-        const operations = [];
+        var operations = [];
 
         class PDFOperationPropertyStack {
 
@@ -509,8 +509,13 @@ class CommonmarkPDFKitRenderer {
 
         };
 
-        return operations.map(removeRedundancies);
+        operations = operations.map(removeRedundancies);
 
+        if (operations[operations.length -1].moveDown) {
+            operations.pop();
+        }
+
+        return operations;
     }
 
     /**
@@ -663,6 +668,8 @@ class CommonmarkPDFKitRenderer {
             y: doc.y,
             x: doc.x
         };
+
+        console.log(operations);
 
         operations.forEach(op => {
             executeOperation(op, doc, Object.assign({}, this.options, {pdfkit: pdfkitOptions, initialPosition}));

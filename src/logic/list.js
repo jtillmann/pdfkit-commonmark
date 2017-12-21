@@ -1,6 +1,6 @@
 export const arabicIndent = (doc, count) => doc.widthOfString(`${count}.`) + 5;
 
-export const discIndent = (doc, fontSize) => (fontSize || 12) * 1; // eslint-disable-line no-unused-vars
+export const discIndent = (doc, fontSize) => (fontSize || 12) * 1.5; // eslint-disable-line no-unused-vars
 
 /**
  * Return the calculated indent for the given listStyle,

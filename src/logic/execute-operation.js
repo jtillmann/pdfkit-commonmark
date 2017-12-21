@@ -44,8 +44,8 @@ export default (operation, doc, options) => {
         }
 
         const renderDisc = (doc) => {
-            const radius = (options.fontSize || 12) * .25;
-            const x = doc.x - 3 * radius;
+            const radius = (options.fontSize || 12) * .15;
+            const x = doc.x - 6 * radius;
             const y = doc.y + (textHeight / 2) - (radius / 2);
             doc.circle(x, y, radius).fill();
         };

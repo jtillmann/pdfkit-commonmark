@@ -785,7 +785,7 @@ var CommonmarkPDFKitRenderer = function () {
                             var numLinebreaks = ((continuousText || '').match(/\n/g) || []).length;
                             if (numLinebreaks > 0) {
                                 currentLineHeight = doc._font.lineHeight(currentFontSize, true);
-                                heightChange -= numLinebreaks * currentLineHeight;
+                                heightChange -= numLinebreaks * (currentLineHeight - currentFontSize);
                             }
 
                             if (_this.options.debug) {

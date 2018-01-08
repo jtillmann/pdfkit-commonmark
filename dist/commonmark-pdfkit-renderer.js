@@ -732,7 +732,7 @@ var CommonmarkPDFKitRenderer = function () {
                 var currentFontSize = this.options.fontSize;
                 var continuousText = '';
                 var indent = 0;
-                operations.forEach(function (op) {
+                operations.forEach(function (op, index) {
 
                     var heightChange = 0;
 
@@ -785,7 +785,7 @@ var CommonmarkPDFKitRenderer = function () {
                             var numLinebreaks = ((continuousText || '').match(/\n/g) || []).length;
                             if (numLinebreaks > 0) {
                                 currentLineHeight = doc._font.lineHeight(currentFontSize, true);
-                                heightChange -= numLinebreaks * (currentLineHeight - currentFontSize);
+                                heightChange -= numLinebreaks * currentLineHeight;
                             }
 
                             if (_this.options.debug) {
@@ -797,6 +797,14 @@ var CommonmarkPDFKitRenderer = function () {
                             // is not evaluated again
                             continuousText = '';
                         }
+                    }
+
+                    // When the initial operation is not a text (e.g. bold) the initial 
+                    // line's height is missing. It is added here.
+                    if (index === 0 && !op.text && !op.moveDown && !op.moveUp) {
+                        currentLineHeight = doc._font.lineHeight(currentFontSize, true);
+                        console.log('initial non-text: incr heightChange by ', currentLineHeight);
+                        heightChange += currentLineHeight;
                     }
 
                     if (op.list === true) {

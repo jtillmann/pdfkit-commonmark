@@ -565,7 +565,7 @@ class CommonmarkPDFKitRenderer {
         let currentFontSize = this.options.fontSize;
         let continuousText = '';
         let indent = 0;
-        operations.forEach(op => {
+        operations.forEach((op, index) => {
 
             let heightChange = 0;
 
@@ -618,7 +618,7 @@ class CommonmarkPDFKitRenderer {
                     const numLinebreaks = ((continuousText || '').match(/\n/g) || []).length;
                     if (numLinebreaks > 0) {
                         currentLineHeight = doc._font.lineHeight(currentFontSize, true);
-                        heightChange -= numLinebreaks * (currentLineHeight - currentFontSize);
+                        heightChange -= numLinebreaks * currentLineHeight;
                     }
 
                     if (this.options.debug) {
@@ -631,6 +631,15 @@ class CommonmarkPDFKitRenderer {
                     continuousText = '';
 
                 }
+
+            }
+
+            // When the initial operation is not a text (e.g. bold) the initial 
+            // line's height is missing. It is added here.
+            if (index === 0 && !op.text &&!op.moveDown && !op.moveUp) {
+                currentLineHeight = doc._font.lineHeight(currentFontSize, true);
+                console.log('initial non-text: incr heightChange by ', currentLineHeight);
+                heightChange += currentLineHeight;
 
             }
 

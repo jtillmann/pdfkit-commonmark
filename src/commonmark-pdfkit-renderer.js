@@ -638,7 +638,6 @@ class CommonmarkPDFKitRenderer {
             // line's height is missing. It is added here.
             if (index === 0 && !op.text &&!op.moveDown && !op.moveUp) {
                 currentLineHeight = doc._font.lineHeight(currentFontSize, true);
-                console.log('initial non-text: incr heightChange by ', currentLineHeight);
                 heightChange += currentLineHeight;
 
             }

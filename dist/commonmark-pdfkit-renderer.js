@@ -665,7 +665,7 @@ var CommonmarkPDFKitRenderer = function () {
 
                 operations = operations.map(removeRedundancies);
 
-                if (operations[operations.length - 1].moveDown) {
+                if (operations.length > 0 && operations[operations.length - 1].moveDown) {
                     operations.pop();
                 }
 
